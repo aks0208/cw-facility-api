@@ -6,6 +6,7 @@
 # requirements
 $ node.js <= 17.3.0
 $ redis
+$ postgres
 
 # install dependencies
 $ npm install
