@@ -1,8 +1,19 @@
 import { DateTime } from 'luxon'
-import {BaseModel, beforeCreate, column, HasMany, hasMany, HasOne, hasOne} from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  beforeCreate,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+  HasOne,
+  hasOne
+} from '@ioc:Adonis/Lucid/Orm'
 import CardCustomer from "App/Models/CardCustomer";
 import CardProgram from "App/Models/CardProgram";
 import { v4 as uuid } from 'uuid'
+import Loyalty from "App/Models/Loyalty";
 
 export default class Card extends BaseModel {
 
@@ -15,13 +26,22 @@ export default class Card extends BaseModel {
   public holderNumber: bigint
 
   @column()
-  public balance: number
+  public balance: string
+
+  @column()
+  public autoCharge: boolean
+
+  @column()
+  public loyaltyId: number
 
   @hasOne(() => CardCustomer)
   public customer: HasOne<typeof CardCustomer>
 
   @hasMany(() => CardProgram)
   public programs: HasMany<typeof CardProgram>
+
+  @belongsTo(() => Loyalty)
+  public loyalty: BelongsTo<typeof Loyalty>
 
   @beforeCreate()
   public static async createAutoValues (card: Card) {

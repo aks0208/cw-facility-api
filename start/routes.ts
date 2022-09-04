@@ -20,19 +20,62 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
-
 Route.group(() => {
 
-  Route.post('/login', 'LoginController.authenticate').namespace('App/Controllers/Http/API/Auth')
+
+  Route.group(() => {
+    Route.post('/login', 'LoginController.authenticate')
+    Route.get('/me', 'AuthenticationController.me').middleware('auth')
+
+  }).namespace('App/Controllers/Http/API/Auth')
+
+  Route.group(() => {
+
+    Route.group(() => {
+      Route.get('/', 'ProgramsController.show')
+      Route.get('/combined', 'ProgramsController.showCombinedProgram')
+    }).prefix('programs')
+
+    Route.group(() => {
+
+      Route.group(() => {
+        Route.put('/', 'MainController.updateCreatedStep')
+        Route.post('/', 'MainController.createStep')
+      }).prefix('step')
+
+      Route.get('/:card_program_id', 'MainController.showById')
+      Route.post('/:program_id', 'MainController.create')
+
+
+
+    }).prefix('card-programs')
+
+    Route.group(() => {
+
+      Route.put('/auto-charge', 'MainController.updateAutoCharge')
+      Route.put('/balance', 'MainController.updateBalance')
+
+    }).prefix('card')
+
+
+    Route.get('/steps', 'StepsController.show')
+    Route.post('/prepare-facility', 'MainController.create')
+
+  }).namespace('App/Controllers/Http/API').middleware('auth')
 
 }).prefix('api')
 
 
 Route.group(() => {
 
-  Route.post('/login', 'LoginController.login').namespace('App/Controllers/Http/CMS/Auth')
+  Route.group(() => {
+    Route.post('/login', 'LoginController.login')
+    Route.get('/me', 'AuthenticationController.me').middleware('auth:cms')
+
+  }).namespace('App/Controllers/Http/CMS/Auth')
+
+  Route.group(() => {
+    Route.get('/clients', 'ClientsController.show')
+  }).namespace('App/Controllers/Http/CMS').middleware('auth:cms')
 
 }).prefix('cms')

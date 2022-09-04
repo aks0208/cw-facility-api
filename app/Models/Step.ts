@@ -21,6 +21,12 @@ export default class Step extends BaseModel {
   @column()
   public time: number
 
+  @column()
+  public imgPath: string
+
+  @column({serializeAs: 'combined_program_id'})
+  public combinedProgramId: string
+
   @beforeCreate()
   public static async createId (step: Step) {
     step.id = uuid()

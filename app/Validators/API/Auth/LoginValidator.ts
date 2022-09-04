@@ -43,6 +43,6 @@ export default class LoginValidator {
   public messages: CustomMessages = {
     number: 'Field {{field}} must be number.',
     required: 'Field {{field}} is required.',
-    exists: "The {{field}} doesn't exist.",
+    exists: "Field {{field}} doesn't exist.",
   }
 }

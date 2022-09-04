@@ -1,15 +1,16 @@
 import { DateTime } from 'luxon'
-import {BaseModel, BelongsTo, belongsTo, column} from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, beforeCreate, BelongsTo, belongsTo, column, hasMany, HasMany} from '@ioc:Adonis/Lucid/Orm'
 import Card from "App/Models/Card";
 import Program from "App/Models/Program";
-import Step from "App/Models/Step";
+import Activity from "App/Models/Activity";
+import { v4 as uuid } from 'uuid'
+import CreatedStep from "App/Models/CreatedStep";
+import Transaction from "App/Models/Transaction";
 
 export default class CardProgram extends BaseModel {
 
-  public static selfAssignPrimaryKey = true
-
   @column({ isPrimary: true })
-  public id: number
+  public id: string
 
   @column()
   public cardId: string
@@ -18,13 +19,10 @@ export default class CardProgram extends BaseModel {
   public programId: string
 
   @column()
-  public stepId: number
+  public stepId: string
 
   @column()
-  public status: string
-
-  @column()
-  public price: number
+  public current: boolean
 
   @belongsTo(() => Card)
   public card: BelongsTo<typeof Card>
@@ -32,8 +30,19 @@ export default class CardProgram extends BaseModel {
   @belongsTo(() => Program)
   public program: BelongsTo<typeof Program>
 
-  @belongsTo(() => Step)
-  public step: BelongsTo<typeof Step>
+  @hasMany(() => CreatedStep)
+  public steps: HasMany<typeof CreatedStep>
+
+  @hasMany(() => Activity)
+  public activities: HasMany<typeof Activity>
+
+  @beforeCreate()
+  public static async createId (program: Program) {
+    program.id = uuid()
+  }
+
+  @hasMany(() => Transaction)
+  public transactions: HasMany<typeof Transaction>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

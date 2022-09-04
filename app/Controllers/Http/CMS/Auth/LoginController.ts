@@ -9,20 +9,16 @@ export default class LoginController {
 
     const { email, password } =  await request.validate(LoginValidator)
 
-    const emp = await Employee.first()
-    emp!.password = 'password'
-    await emp!.save()
-
-    const user = await Employee.query()
+    const employee = await Employee.query()
       .where('email', email)
       .firstOrFail()
 
-    if (!(await Hash.verify(user.password, password))) {
+    if (!(await Hash.verify(employee.password, password))) {
       response.badRequest('Invalid credentials')
       return
     }
 
-    return await auth.use('cms').generate(user, {
+    return await auth.use('cms').generate(employee, {
       expiresIn: '7days'
     })
 

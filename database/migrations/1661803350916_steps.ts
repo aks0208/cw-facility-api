@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('description')
       table.decimal('price')
       table.bigInteger('time')
+      table.string('img_path')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

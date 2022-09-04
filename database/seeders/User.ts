@@ -1,6 +1,7 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import CustomerFactory from "Database/factories/CustomerFactory";
 import Card from "App/Models/Card";
+import EmployeeFactory from "Database/factories/EmployeeFactory";
 //import EmployeeFactory from "Database/factories/EmployeeFactory";
 
 export default class extends BaseSeeder {
@@ -12,7 +13,7 @@ export default class extends BaseSeeder {
       c.related('cards').create({cardId: card!.id, customerId: c.$getAttribute('id')})
     }
 
-  //  await EmployeeFactory.createMany(5)
+    await EmployeeFactory.createMany(5)
 
   }
 }

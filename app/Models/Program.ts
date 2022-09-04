@@ -7,10 +7,10 @@ export default class Program extends BaseModel {
 
   public static selfAssignPrimaryKey = true
 
-  public static SIMPLE = 'Simple washing program'
-  public static ADVANCED = 'Advanced washing program'
-  public static SUPER = 'Super washing program'
-  public static COMBINED = 'Combined washing program'
+  public static SIMPLE = 'simple-washing-program'
+  public static ADVANCED = 'advanced-washing-program'
+  public static SUPER = 'super-washing-program'
+  public static COMBINED = 'combined-washing-program'
 
   @column({ isPrimary: true })
   public id: string
@@ -19,14 +19,42 @@ export default class Program extends BaseModel {
   public name: string
 
   @column()
+  public slug: string
+
+  @column()
   public description: string
+
+  @column()
+  public imgPath: string
 
   @manyToMany(() => Step)
   public steps: ManyToMany<typeof Step>
 
+  @column({ serializeAs: 'total_price' })
+  public totalPrice: string
+
+  public serializeExtras() {
+    return {
+      price: this.$extras.totalPrice
+    }
+  }
+
   @beforeCreate()
   public static async createId (program: Program) {
     program.id = uuid()
+  }
+
+  @beforeCreate()
+  public static slugify(program: Program) {
+    let slugify = require('slugify')
+    program.slug = slugify(program.name, {
+      replacement: '-',
+      remove: /[*+~.()'"!:@]/g,
+      lower: true,
+      strict: false,
+      locale: 'vi',
+      trim: true
+    })
   }
 
   @column.dateTime({ autoCreate: true })

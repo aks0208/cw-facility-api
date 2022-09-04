@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.string('last_name', 45)
       table.string('email', 45)
       table.string('phone_number', 45).nullable()
-      table.string('password', 45)
+      table.string('password', 255)
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

@@ -8,7 +8,9 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').unique().primary()
       table.string('name', 65)
+      table.string('slug', 65)
       table.string('description')
+      table.string('img_path')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

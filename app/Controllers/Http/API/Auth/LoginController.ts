@@ -3,9 +3,11 @@
 import Card from "App/Models/Card";
 import LoginValidator from "App/Validators/API/Auth/LoginValidator";
 import Customer from "App/Models/Customer";
+import Redis from "@ioc:Adonis/Addons/Redis";
 
 export default class LoginController {
-  async authenticate({auth, response, request}) {
+
+  async authenticate({ auth, response, request }) {
 
     const {holder_number}  = await request.validate(LoginValidator)
 
@@ -21,8 +23,10 @@ export default class LoginController {
       }).firstOrFail()
 
 
-      if (!card || !customer) return response.badRequest('Invalid card id')
+      if (!card || !customer)
+        return response.badRequest('Invalid card id')
 
+      await Redis.set(`currentCardId:${customer.id}`, card.id)
 
       return await auth.use('api').generate(customer,  {
         expiresIn: '1days'
@@ -32,5 +36,7 @@ export default class LoginController {
       return response.badRequest('Invalid card id')
     }
   }
+
+
 
 }

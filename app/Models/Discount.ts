@@ -1,18 +1,19 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Transaction extends BaseModel {
+export default class Discount extends BaseModel {
 
-  public static selfAssignPrimaryKey = true
+  public static RELATIVE = 'RELATIVE'
+  public static ABSOLUTE = 'ABSOLUTE'
 
   @column({ isPrimary: true })
-  public id: string
+  public id: number
 
   @column()
-  public cardProgramId: string
+  public discount: number
 
   @column()
-  public total: string
+  public type: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
