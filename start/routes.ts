@@ -75,7 +75,22 @@ Route.group(() => {
   }).namespace('App/Controllers/Http/CMS/Auth')
 
   Route.group(() => {
-    Route.get('/clients', 'ClientsController.show')
+    Route.group(() => {
+      Route.get('/', 'ClientsController.show')
+      Route.get('/:id', 'ClientsController.showById')
+      Route.post('/', 'ClientsController.create')
+    }).prefix('clients')
+
+    Route.group(() => {
+      Route.get('/', 'ActivitiesController.show')
+      Route.get('/:id', 'ActivitiesController.showById')
+    }).prefix('activities')
+
+    Route.group(() => {
+      Route.get('/', 'EmployeesController.show')
+    }).prefix('employees')
+
+
   }).namespace('App/Controllers/Http/CMS').middleware('auth:cms')
 
 }).prefix('cms')
