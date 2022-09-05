@@ -75,6 +75,7 @@ export default class MainController {
         programId: payload.program_id
       })
 
+
       await MainController.createTransaction(card, payload.total_price, cardProgram.id)
 
       await cardProgram.related('steps')
@@ -103,8 +104,12 @@ export default class MainController {
 
     let totalPrice = price;
 
-    const totalTransactions = card.programs.map(p => Number(p.$extras.transactions_count))
-      .reduce((prev, next) => prev + next)
+    let totalTransactions = 0;
+
+    if(card.programs.length) {
+      totalTransactions = card.programs.map(p => Number(p.$extras.transactions_count))
+        .reduce((prev, next) => prev + next)
+    }
 
     if(card.loyalty.discount.type === Discount.RELATIVE && (totalTransactions % card.loyalty.everyNth) === 0) {
       totalPrice = price - (price/card.loyalty.discount.discount)
