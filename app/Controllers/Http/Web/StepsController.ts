@@ -5,7 +5,7 @@ import Program from "App/Models/Program";
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
 
 export default class StepsController {
-  public async show({response}: HttpContextContract) {
+  async show({response}: HttpContextContract) {
 
     try {
       const combinedProgram = await Program.findByOrFail('slug', Program.COMBINED)
@@ -28,4 +28,5 @@ export default class StepsController {
     }
 
   }
+
 }

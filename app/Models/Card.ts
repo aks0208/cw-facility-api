@@ -34,6 +34,9 @@ export default class Card extends BaseModel {
   @column()
   public loyaltyId: number
 
+  @column()
+  public totalTransactions: number
+
   @hasOne(() => CardCustomer)
   public customer: HasOne<typeof CardCustomer>
 

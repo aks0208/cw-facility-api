@@ -5,7 +5,7 @@ import CardProgram from "App/Models/CardProgram";
 import Program from "App/Models/Program";
 import { v4 as uuid } from 'uuid'
 
-export default class CreatedStep extends BaseModel {
+export default class CardProgramStep extends BaseModel {
 
   public static selfAssignPrimaryKey = true
 

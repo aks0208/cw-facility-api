@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'created_steps'
+  protected tableName = 'card_program_steps'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {

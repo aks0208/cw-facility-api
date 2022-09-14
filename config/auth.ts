@@ -110,7 +110,7 @@ const authConfig: AuthConfig = {
 
       },
     },
-    cms: {
+    admin: {
       driver: 'oat',
 
 

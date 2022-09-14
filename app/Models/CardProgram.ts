@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon'
-import {BaseModel, beforeCreate, BelongsTo, belongsTo, column, hasMany, HasMany} from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, beforeCreate, BelongsTo, belongsTo, column, hasMany, HasMany, scope} from '@ioc:Adonis/Lucid/Orm'
 import Card from "App/Models/Card";
 import Program from "App/Models/Program";
 import Activity from "App/Models/Activity";
 import { v4 as uuid } from 'uuid'
-import CreatedStep from "App/Models/CreatedStep";
+import CardProgramStep from "App/Models/CardProgramStep";
 import Transaction from "App/Models/Transaction";
 
 export default class CardProgram extends BaseModel {
@@ -30,8 +30,8 @@ export default class CardProgram extends BaseModel {
   @belongsTo(() => Program)
   public program: BelongsTo<typeof Program>
 
-  @hasMany(() => CreatedStep)
-  public steps: HasMany<typeof CreatedStep>
+  @hasMany(() => CardProgramStep)
+  public steps: HasMany<typeof CardProgramStep>
 
   @hasMany(() => Activity)
   public activities: HasMany<typeof Activity>
@@ -49,4 +49,8 @@ export default class CardProgram extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public static current = scope((query) => {
+    query.where('current', true)
+  })
 }

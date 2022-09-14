@@ -1,20 +1,23 @@
 'use strict'
 
 import Card from "App/Models/Card";
+import CardProgramService from "App/Services/API/CardProgramService";
 
-export default class CardService {
+export default class CardService extends CardProgramService {
   protected currentCardId: string
+  protected card: Card
 
-  constructor(currentCardId: string) {
+  constructor(currentCardId: string, card?: any ) {
+    super(card);
     this.currentCardId = currentCardId;
   }
 
   async getCurrentCard() {
 
-    return await Card.query()
+    this.card = await Card.query()
       .where('id', this.currentCardId)
       .preload('programs', (queryProgram) => {
-        queryProgram.withCount('transactions')
+        queryProgram.select('id')
       })
       .preload('loyalty', (queryLoyalty) => {
         queryLoyalty.select('discount_id', 'id', 'min', 'max', 'every_nth')
@@ -23,6 +26,8 @@ export default class CardService {
         })
       })
       .firstOrFail()
+
+    return this.card
   }
 
 }

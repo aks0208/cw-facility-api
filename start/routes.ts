@@ -20,70 +20,78 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+//Web
 Route.group(() => {
 
-
+  //auth
   Route.group(() => {
     Route.post('/login', 'LoginController.authenticate')
     Route.get('/me', 'AuthenticationController.me').middleware('auth')
 
-  }).namespace('App/Controllers/Http/API/Auth')
+  }).namespace('App/Controllers/Http/Web/Auth')
 
   Route.group(() => {
 
+    //default programs
     Route.group(() => {
+
       Route.get('/', 'ProgramsController.show')
       Route.get('/combined', 'ProgramsController.showCombinedProgram')
+
     }).prefix('programs')
 
+    //default steps
+    Route.get('/steps', 'StepsController.show')
+
+    //customer's programs
     Route.group(() => {
 
+      Route.get('/:id', 'CardProgramsController.showById').where('id', Route.matchers.uuid())
+      Route.post('/', 'CardProgramsController.create').middleware(['card', 'balance'])
+
+      //program with steps
       Route.group(() => {
-        Route.put('/', 'MainController.updateCreatedStep')
-        Route.post('/', 'MainController.createStep')
-      }).prefix('step')
 
-      Route.get('/:card_program_id', 'MainController.showById')
-      Route.post('/:program_id', 'MainController.create')
+        Route.put('/', 'CardProgramStepsController.update')
+        Route.post('/', 'CardProgramStepsController.create').middleware(['card', 'balance'])
 
-
+      }).prefix('/step').where('card_program_id', Route.matchers.uuid())
 
     }).prefix('card-programs')
 
+    //card
     Route.group(() => {
 
-      Route.put('/auto-charge', 'MainController.updateAutoCharge')
-      Route.put('/balance', 'MainController.updateBalance')
+      Route.put('/auto-charge', 'CardsController.updateAutoCharge')
+      Route.put('/balance', 'CardsController.updateBalance')
 
     }).prefix('card')
 
 
-    Route.get('/steps', 'StepsController.show')
-    Route.post('/prepare-facility', 'MainController.create')
-
-  }).namespace('App/Controllers/Http/API').middleware('auth')
+  }).namespace('App/Controllers/Http/Web').middleware('auth')
 
 }).prefix('api')
 
 
+//Admin
 Route.group(() => {
 
   Route.group(() => {
     Route.post('/login', 'LoginController.login')
-    Route.get('/me', 'AuthenticationController.me').middleware('auth:cms')
+    Route.get('/me', 'AuthenticationController.me').middleware('auth:admin')
 
-  }).namespace('App/Controllers/Http/CMS/Auth')
+  }).namespace('App/Controllers/Http/Admin/Auth')
 
   Route.group(() => {
     Route.group(() => {
       Route.get('/', 'ClientsController.show')
-      Route.get('/:id', 'ClientsController.showById')
+      Route.get('/:id', 'ClientsController.showById').where('id', Route.matchers.number())
       Route.post('/', 'ClientsController.create')
     }).prefix('clients')
 
     Route.group(() => {
       Route.get('/', 'ActivitiesController.show')
-      Route.get('/:id', 'ActivitiesController.showById')
+      Route.get('/:id', 'ActivitiesController.showById').where('id', Route.matchers.number())
     }).prefix('activities')
 
     Route.group(() => {
@@ -91,6 +99,6 @@ Route.group(() => {
     }).prefix('employees')
 
 
-  }).namespace('App/Controllers/Http/CMS').middleware('auth:cms')
+  }).namespace('App/Controllers/Http/Admin').middleware('auth:admin')
 
-}).prefix('cms')
+}).prefix('admin')

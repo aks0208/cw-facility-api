@@ -7,9 +7,9 @@ import Redis from "@ioc:Adonis/Addons/Redis";
 
 export default class LoginController {
 
-  async authenticate({ auth, response, request }) {
+  async authenticate({ auth, response, request } ) {
 
-    const {holder_number}  = await request.validate(LoginValidator)
+    const { holder_number }  = await request.validate(LoginValidator)
 
     try {
       const card = await Card
@@ -36,7 +36,4 @@ export default class LoginController {
       return response.badRequest('Invalid card id')
     }
   }
-
-
-
 }

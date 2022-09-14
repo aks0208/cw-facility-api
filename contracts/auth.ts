@@ -69,8 +69,8 @@ declare module '@ioc:Adonis/Addons/Auth' {
     | to authenticate requests.
     |
     */
-    cms: {
-      implementation: OATGuardContract<'user', 'cms'>
+    admin: {
+      implementation: OATGuardContract<'user', 'admin'>
       config: OATGuardConfig<'user'>
       client: OATClientContract<'user'>
     },
