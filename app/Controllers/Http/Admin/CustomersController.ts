@@ -5,7 +5,7 @@ import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
 import CreateClientValidator from "App/Validators/Admin/Client/CreateClientValidator";
 import Card from "App/Models/Card";
 
-export default class ClientsController {
+export default class CustomersController {
   public async show() {
     return Customer.query()
       .preload('cards', (queryCard) => {

@@ -84,10 +84,10 @@ Route.group(() => {
 
   Route.group(() => {
     Route.group(() => {
-      Route.get('/', 'ClientsController.show')
-      Route.get('/:id', 'ClientsController.showById').where('id', Route.matchers.number())
-      Route.post('/', 'ClientsController.create')
-    }).prefix('clients')
+      Route.get('/', 'CustomersController.show')
+      Route.get('/:id', 'CustomersController.showById').where('id', Route.matchers.number())
+      Route.post('/', 'CustomersController.create')
+    }).prefix('customers')
 
     Route.group(() => {
       Route.get('/', 'ActivitiesController.show')
@@ -97,6 +97,16 @@ Route.group(() => {
     Route.group(() => {
       Route.get('/', 'EmployeesController.show')
     }).prefix('employees')
+
+    Route.group(() => {
+      Route.get('/', 'ProgramsController.show')
+      Route.get('/:id', 'ProgramsController.showById').where('id', Route.matchers.uuid())
+    }).prefix('programs')
+
+    Route.group(() => {
+      Route.get('/', 'StepsController.show')
+      Route.get('/:id', 'StepsController.showById').where('id', Route.matchers.uuid())
+    }).prefix('steps')
 
 
   }).namespace('App/Controllers/Http/Admin').middleware('auth:admin')
