@@ -101,6 +101,9 @@ Route.group(() => {
     Route.group(() => {
       Route.get('/', 'ProgramsController.show')
       Route.get('/:id', 'ProgramsController.showById').where('id', Route.matchers.uuid())
+      Route.post('/', 'ProgramsController.create')
+      Route.put('/:id', 'ProgramsController.update').where('id', Route.matchers.uuid())
+      Route.delete('/:id', 'ProgramsController.delete').where('id', Route.matchers.uuid())
     }).prefix('programs')
 
     Route.group(() => {

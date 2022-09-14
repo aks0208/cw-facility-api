@@ -25,7 +25,7 @@ export default class Program extends BaseModel {
   public description: string
 
   @column()
-  public imgPath: string
+  public imgPath?: string
 
   @manyToMany(() => Step)
   public steps: ManyToMany<typeof Step>

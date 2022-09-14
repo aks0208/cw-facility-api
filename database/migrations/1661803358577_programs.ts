@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('name', 65)
       table.string('slug', 65)
       table.string('description')
-      table.string('img_path')
+      table.string('img_path').nullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

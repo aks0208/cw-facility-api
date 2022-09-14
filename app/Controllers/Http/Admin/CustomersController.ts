@@ -2,7 +2,7 @@
 
 import Customer from "App/Models/Customer";
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
-import CreateClientValidator from "App/Validators/Admin/Client/CreateClientValidator";
+import CreateCustomerValidator from "App/Validators/Admin/Customer/CreateCustomerValidator";
 import Card from "App/Models/Card";
 
 export default class CustomersController {
@@ -28,7 +28,7 @@ export default class CustomersController {
 
   public async create({ request }: HttpContextContract) {
 
-    const payload = await request.validate(CreateClientValidator)
+    const payload = await request.validate(CreateCustomerValidator)
 
     const customer = await Customer.create(payload)
 
