@@ -1,10 +1,10 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
-import UpdateAutoChargeValidator from "App/Validators/API/Card/UpdateAutoChargeValidator";
+import UpdateAutoChargeValidator from "App/Validators/Web/Card/UpdateAutoChargeValidator";
 import Redis from "@ioc:Adonis/Addons/Redis";
 import Card from "App/Models/Card";
-import UpdateBalanceValidator from "App/Validators/API/Card/UpdateBalanceValidator";
+import UpdateBalanceValidator from "App/Validators/Web/Card/UpdateBalanceValidator";
 
 export default class CardsController {
 

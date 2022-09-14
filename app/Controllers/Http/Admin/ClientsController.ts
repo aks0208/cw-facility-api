@@ -2,7 +2,7 @@
 
 import Customer from "App/Models/Customer";
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
-import CreateClientValidator from "App/Validators/CMS/Client/CreateClientValidator";
+import CreateClientValidator from "App/Validators/Admin/Client/CreateClientValidator";
 import Card from "App/Models/Card";
 
 export default class ClientsController {

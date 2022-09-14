@@ -2,7 +2,7 @@
 
 import CardProgram from "App/Models/CardProgram";
 import CardProgramStep from "App/Models/CardProgramStep";
-import TransactionService from "App/Services/API/TransactionService";
+import TransactionService from "App/Services/Web/TransactionService";
 
 export default class CardProgramStepService extends TransactionService {
 

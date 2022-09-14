@@ -1,7 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Hash from "@ioc:Adonis/Core/Hash";
-import LoginValidator from "App/Validators/CMS/Auth/LoginValidator";
+import LoginValidator from "App/Validators/Admin/Auth/LoginValidator";
 import Employee from "App/Models/Employee";
 
 export default class LoginController {
@@ -18,7 +18,7 @@ export default class LoginController {
       return
     }
 
-    return await auth.use('cms').generate(employee, {
+    return await auth.use('admin').generate(employee, {
       expiresIn: '7days'
     })
 

@@ -1,9 +1,9 @@
 'use strict'
 
 import CardProgram from "App/Models/CardProgram";
-import TransactionService from "App/Services/API/TransactionService";
+import TransactionService from "App/Services/Web/TransactionService";
 
-import CardProgramStepService from "App/Services/API/CardProgramStepService";
+import CardProgramStepService from "App/Services/Web/CardProgramStepService";
 import Card from "App/Models/Card";
 const aggregation = require("aggregation/es6")
 

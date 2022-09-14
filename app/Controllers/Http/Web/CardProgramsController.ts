@@ -2,7 +2,7 @@
 
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
 import CardProgram from "App/Models/CardProgram";
-import CardService from "App/Services/API/CardService";
+import CardService from "App/Services/Web/CardService";
 import Activity from "App/Models/Activity";
 
 export default class CardProgramsController {

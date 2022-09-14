@@ -1,7 +1,7 @@
 'use strict'
 
 import Card from "App/Models/Card";
-import CardProgramService from "App/Services/API/CardProgramService";
+import CardProgramService from "App/Services/Web/CardProgramService";
 
 export default class CardService extends CardProgramService {
   protected currentCardId: string

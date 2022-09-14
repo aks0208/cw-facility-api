@@ -1,8 +1,8 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
-import CardService from "App/Services/API/CardService";
-import UpdateStepValidator from "App/Validators/API/CardProgram/Step/UpdateStepValidator";
+import CardService from "App/Services/Web/CardService";
+import UpdateStepValidator from "App/Validators/Web/CardProgram/Step/UpdateStepValidator";
 import CardProgramStep from "App/Models/CardProgramStep";
 
 export default class CardProgramStepsController {

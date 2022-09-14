@@ -1,6 +1,6 @@
 import Card from "App/Models/Card";
-import CreateCardProgramValidator from "App/Validators/API/CardProgram/CreateCardProgramValidator";
-import CreateStepValidator from "App/Validators/API/CardProgram/Step/CreateStepValidator";
+import CreateCardProgramValidator from "App/Validators/Web/CardProgram/CreateCardProgramValidator";
+import CreateStepValidator from "App/Validators/Web/CardProgram/Step/CreateStepValidator";
 
 export default class CheckBalance {
   public async handle(ctx, next: () => Promise<void>) {

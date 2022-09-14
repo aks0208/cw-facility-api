@@ -1,7 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Card from "App/Models/Card";
-import LoginValidator from "App/Validators/API/Auth/LoginValidator";
+import LoginValidator from "App/Validators/Web/Auth/LoginValidator";
 import Customer from "App/Models/Customer";
 import Redis from "@ioc:Adonis/Addons/Redis";
 

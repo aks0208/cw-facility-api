@@ -2,7 +2,7 @@
 
 import Transaction from "App/Models/Transaction";
 import Card from "App/Models/Card";
-import LoyaltyDiscountService from "App/Services/API/LoyaltyDiscountService";
+import LoyaltyDiscountService from "App/Services/Web/LoyaltyDiscountService";
 
 export default class TransactionService extends LoyaltyDiscountService {
 
